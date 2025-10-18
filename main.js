@@ -167,17 +167,15 @@ canvas.addEventListener('click', (event) => {
 
 });
 
-document.addEventListener('click', (event) => {
-    if (event.target.tagName !== 'CANVAS' | event.target.id == 'popup'){
-        popup.style.display = 'none';
-    }
+
+PoolButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    Pooldetail.style.display = Pooldetail.style.display === "none" ? "block" : "none";
 });
 
 document.addEventListener('click', (event) => {
-    if (event.target.id == 'pool'){
-        if (Pooldetail.style.display === 'none'){
-            Pooldetail.style.display = 'block';
-        }
+    if (event.target.id != 'pool' && !PoolButton.contains(event.target) && !Pooldetail.contains(event.target)) {
+        Pooldetail.style.display = 'none';
     }
 });
 
