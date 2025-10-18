@@ -9,6 +9,15 @@ const Pooldetail = document.getElementById('poolDetail'); // Pool Details that s
 const Display = document.getElementById('display'); // Gacha Display Box
 const Roll = document.getElementById('roll'); // Roll Button
 
+//Sprite Drop
+const sprite = new Image();
+sprite.src = 'res/Drop.png';
+
+const frameWidth = 96;
+const frameHeight = 96;
+const numFrames = 7;
+let currentFrame = 0;
+
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -26,7 +35,7 @@ const pool = ['h2o', 'cold h2o', 'long alchohol', 'salt', 'ethanol', 'Blocker'];
 
 
 class Player {
-    constructor(x, y, width, height, stats){
+    constructor(x, y, width, height, stats, sprite = null, frameWidth = 0, frameHeight = 0, numFrames = 1){
         this.position = {
             x: x,
             y: y,
@@ -35,12 +44,45 @@ class Player {
         this.width =  width;
         this.height = height;
         this.stats = stats;
+
+
+        this.sprite = sprite;
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
+        this.numFrames = numFrames;
+        this.currentFrame = 0;
+        this.lastFrameTime = 0;
+        this.frameDuration = 100;
         
     }
 
+    update(time){
+        if(!this.sprite) return;
+
+        if(time - this.lastFrameTime > this.frameDuration){
+            this.currentFrame = (this.currentFrame + 1) % this.numFrames;
+            this.lastFrameTime = time;
+        }
+
+    }
+
     draw(color){
-        c.fillStyle = color;
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+        if (this.sprite && this.sprite.complete){
+            const columns = 3;  
+            const sx = (this.currentFrame % columns) * this.frameWidth;
+            const sy = Math.floor(this.currentFrame / columns) * this.frameHeight;
+
+            c.drawImage(
+                this.sprite,
+                sx, sy, this.frameWidth, this.frameHeight,
+                this.position.x, this.position.y, this.width, this.height
+            );
+        } else {
+            c.fillStyle = color;
+            c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
+        
 
         c.fillStyle = 'black';
         c.font = '20px Arial';
@@ -91,7 +133,7 @@ class Stats{
 const playerStats = new Stats(10, 1);
 
 // Creating a new player instance
-const player = new Player(100, 100, 100, 100, playerStats);
+const player = new Player(100, 100, 100, 100, playerStats, sprite, frameWidth, frameHeight, numFrames);
 
 // -------------Enemies-----------------------
 // Creating stats for the enemy
@@ -137,6 +179,21 @@ function GachaPull(){
     }
 }
 
+function animate(time){
+    c.fillStyle = 'white';
+    c.fillRect(0,0,canvas.width, canvas.height);
+
+    player.update(time);
+    player.draw('blue');
+    enemy.draw('grey');
+
+    requestAnimationFrame(animate);
+}
+
+sprite.onload = () => {
+    requestAnimationFrame(animate);
+}
+
 
 
 drawScene();
@@ -166,8 +223,6 @@ canvas.addEventListener('click', (event) => {
     }    
 
 });
-
-
 PoolButton.addEventListener('click', (event) => {
     event.stopPropagation();
     Pooldetail.style.display = Pooldetail.style.display === "none" ? "block" : "none";
@@ -219,7 +274,3 @@ attackButton.addEventListener('click', () => {
     drawScene();
     updateEnemy();
 });
-
-
-
-
