@@ -49,7 +49,7 @@
                 height: 50%;
                 width: 25%;
                 border-radius: 9px;
-                display: none;
+                display: block;
                 flex-direction: column;
                 align-items: center;
                 margin: auto;
@@ -89,6 +89,17 @@
                 text-align: center;
                 cursor: pointer; 
             }
+            #convert{
+                border: 2px solid black;
+                position: absolute;
+                top: 35%;
+                right: 70%;
+                height: 20px;
+                width: 20px;
+                border-radius: 20px;    
+                text-align: center;
+                cursor: pointer; 
+            }
             #poolDetail{
                 display: none;
                 position: absolute;
@@ -103,6 +114,68 @@
                 font-size: 12px;
                 z-index: 10;
                 text-align: left;
+            }
+            #display_C{
+                display: none;
+                position: absolute;
+                top: 25px;
+                left: -120px;
+                border: 2px solid black;
+                background: white;
+                color: black;
+                padding: 15px;
+                border-radius: 10px;
+                width: 280px;
+                z-index: 10;
+            }
+            #display_C.active{
+                display: block;
+            }
+
+            .converter-content{
+                text-align: left;
+            }
+
+            .converter-header{
+                font-weight: bold;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            .converter-info{
+                font-size: 12px;
+                margin: 8px 0;
+                color: #333;
+            }
+
+            .converter-rate{
+                color: #0066cc;
+                font-weight: bold;
+            }
+
+            .slider-container {
+                margin: 15px 0 10px 0;
+            }
+
+            #atomSlider{
+                width: 100%;
+                cursor: pointer;
+            }
+
+            .slider_labels{
+                display: flex;
+                justify-content: space-between;
+                font-size: 10px;
+                color: #666;
+                margin-top: 5px;
+            }
+
+            .conversion-preview {
+                background: #f0f0f0;
+                padding: 8px;
+                border-radius: 5px;
+                margin: 10px 0;
+                font-size: 12px;
             }
 
 
@@ -132,7 +205,32 @@
                         <p>All Rate 0.05%</p>
                     </div>
                 </div>
-                <div id="conver"></div>
+                <div id="convert">C
+                    <div id="display_C">
+                        <div class="converter-content">
+                            <div class="converter-header">Atom Converter</div>
+                            <div class="converter-info">
+                                Atoms: <spans id="atomCount">0</spans>
+                            </div>
+                            <p>Rate: 3 Atoms -> 1 Mole</p>
+                        </div>
+
+                        <div class="slider-container">
+                            <input type="range" id="atomSlider" min="0" max="0" value="0" step="3">
+                            <div class="slider-labels">
+                                <span>0</span>
+                                <span id="maxAtoms">0</span>
+                            </div>
+                        </div>
+                        
+
+                        <div class="conversion-preview">
+                            Convert <span id="atomsToConvert">0</span> atoms -> <span id="molesResult">0</span> moles
+                        </div>
+
+                        <button class="convert-button" id="confirmConvert" disabled>Convert</button>
+                    </div>
+                </div>
                 <button id="roll">ROLL</button>
             </div>
         </div>
