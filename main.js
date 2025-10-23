@@ -8,6 +8,8 @@ const PoolButton = document.getElementById('pool'); // Pool Button Indicated by 
 const Pooldetail = document.getElementById('poolDetail'); // Pool Details that shows when clicking the pool button
 const Display = document.getElementById('display'); // Gacha Display Box
 const Roll = document.getElementById('roll'); // Roll Button
+const Converter = document.getElementById('convert');// Converter
+const Converter_Display = document.getElementById('display_C'); // Converter Display
 
 //Sprite Drop
 const sprite = new Image();
@@ -232,12 +234,19 @@ document.addEventListener('click', (event) => {
     if (event.target.id != 'pool' && !PoolButton.contains(event.target) && !Pooldetail.contains(event.target)) {
         Pooldetail.style.display = 'none';
     }
+    if (event.target.id != 'Converter' && !Converter.contains(event.target) && !Converter.contains(event.target)){
+        Converter_Display.style.display = 'none';
+    }
 });
 
 document.addEventListener('click', (event) => {
     if (event.target.id == 'Roll'){
         GachaPull();
     }
+});
+
+Converter.addEventListener('click', (event) => {
+    Converter_Display.style.display = 'block';
 });
 
 attackButton.addEventListener('click', () => {
