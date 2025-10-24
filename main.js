@@ -11,6 +11,12 @@ const Roll = document.getElementById('roll'); // Roll Button
 const Converter = document.getElementById('convert');// Converter
 const Converter_Display = document.getElementById('display_C'); // Converter Display
 
+//Number counter
+let count = 0 / 3;
+const counterDisplay = document.getElementById('counter');
+const incrementBtn = document.getElementById('increment');
+const decrementBtn = document.getElementById('decrement');
+
 //Sprite Drop
 const sprite = new Image();
 sprite.src = 'res/Drop.png';
@@ -196,7 +202,13 @@ sprite.onload = () => {
     requestAnimationFrame(animate);
 }
 
+function updateCounterDisplay(){
+    counterDisplay.textContent = count;
+}
 
+
+
+updateCounterDisplay();
 
 drawScene();
 //-------------------------------------------------------
@@ -276,10 +288,27 @@ attackButton.addEventListener('click', () => {
         alert('All enemies defeated! You win!');
         gachaBox.style.display = 'block';
     }
-    
-    
-
-    
+ 
     drawScene();
     updateEnemy();
 });
+
+incrementBtn.addEventListener('click', () => {
+    if(Atoms <= 0){
+        console.log(`No of Atoms ${Atoms}`);
+        alert("Atoms not enough!");
+    }
+    else{
+        count++;
+        Atoms -= 3;
+    }
+    updateCounterDisplay();
+});
+
+decrementBtn.addEventListener('click', () => {
+    if(count > 0){
+        count--;
+    }
+    updateCounterDisplay();
+});
+updateCounterDisplay();
