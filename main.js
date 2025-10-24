@@ -10,6 +10,7 @@ const Display = document.getElementById('display'); // Gacha Display Box
 const Roll = document.getElementById('roll'); // Roll Button
 const Converter = document.getElementById('convert');// Converter
 const Converter_Display = document.getElementById('display_C'); // Converter Display
+const ConvertBtn = document.getElementById('confirmConvert');//Convert Button
 
 //Number counter
 let count = 0 / 3;
@@ -206,6 +207,10 @@ function updateCounterDisplay(){
     counterDisplay.textContent = count;
 }
 
+function updateConvertButton() {
+    ConvertBtn.disabled = count < 3;
+}
+
 
 
 updateCounterDisplay();
@@ -294,6 +299,7 @@ attackButton.addEventListener('click', () => {
 });
 
 incrementBtn.addEventListener('click', () => {
+    
     if(Atoms <= 0){
         console.log(`No of Atoms ${Atoms}`);
         alert("Atoms not enough!");
@@ -301,6 +307,7 @@ incrementBtn.addEventListener('click', () => {
     else{
         count++;
         Atoms -= 3;
+        updateConvertButton();
     }
     updateCounterDisplay();
 });
@@ -309,6 +316,8 @@ decrementBtn.addEventListener('click', () => {
     if(count > 0){
         count--;
     }
+    updateConvertButton();
     updateCounterDisplay();
 });
 updateCounterDisplay();
+updateConvertButton();
