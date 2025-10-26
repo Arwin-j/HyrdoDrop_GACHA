@@ -32,12 +32,13 @@ canvas.width = 1024;
 canvas.height = 576;
 
 enemyCount = 9;
+registeredEnemy = 9;
 enemyKilled = 0;
 currentEnemy = 0;
 
 Atoms = 0;
 
-Mole = 0;
+Mole = count;
 
 const pool = ['h2o', 'cold h2o', 'long alchohol', 'salt', 'ethanol', 'Blocker'];
 
@@ -105,6 +106,11 @@ class Player {
         c.font = '20px Arial';
         c.textAlign = 'center';
         c.fillText(`${currentEnemy = enemyCount} Enemies Left`, canvas.width / 2, 50);
+
+        c.fillStyle = 'black';
+        c.font = '20px Arial';
+        c.textAlign = 'left';
+        c.fillText(`Moles: ${Mole}`, canvas.width - 300, 50);
 
         c.fillStyle = 'black';
         c.font = '20px Arial';
@@ -179,12 +185,12 @@ function gacha() {
 
 function GachaPull(){
     const gachacost = 1;
-    if (Moles >= gachacost){
+    if (Mole >= gachacost){
         gacha();
-        Moles -= 1;
+        Mole -= 1;
     }
     else{
-        alert('Not enough Moles!');
+        alert('Not enough Mole!');
     }
 }
 
@@ -313,11 +319,18 @@ incrementBtn.addEventListener('click', () => {
 });
 
 decrementBtn.addEventListener('click', () => {
-    if(count > 0){
+    if(count > 0 && Atoms < registeredEnemy){
+
         count--;
+        Atoms += 3;
     }
     updateConvertButton();
     updateCounterDisplay();
 });
-updateCounterDisplay();
-updateConvertButton();
+
+ConvertBtn.addEventListener('click', () => {
+    Converter_Display.style.display = 'none';
+    Mole = count;
+    
+
+})
