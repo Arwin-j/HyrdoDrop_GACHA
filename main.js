@@ -12,6 +12,7 @@ const Converter = document.getElementById('convert');// Converter
 const Converter_Display = document.getElementById('display_C'); // Converter Display
 const ConvertBtn = document.getElementById('confirmConvert');//Convert Button
 
+
 //Number counter
 let count = 0 / 3;
 const counterDisplay = document.getElementById('counter');
@@ -40,8 +41,8 @@ Atoms = 0;
 
 Mole = count;
 
-const pool = ['h2o', 'cold h2o', 'long alchohol', 'salt', 'ethanol', 'Blocker'];
-
+const pool = ['h2o', 'cold h2o', 'long alcohol', 'salt', 'ethanol', 'Blocker'];
+let output = ""
 
 
 class Player {
@@ -179,7 +180,8 @@ function updateEnemy(){
 }
 
 function gacha() {
-    const output = pool[Math.floor(Math.random() * pool.length)];
+    console.log("Gacha Initiated");
+    output = pool[Math.floor(Math.random() * pool.length)];
     console.log(output);
 }
 
@@ -192,6 +194,9 @@ function GachaPull(){
     else{
         alert('Not enough Mole!');
     }
+}
+function displayResult(){
+    Display.innerText = output
 }
 
 function animate(time){
@@ -262,11 +267,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-document.addEventListener('click', (event) => {
-    if (event.target.id == 'Roll'){
-        GachaPull();
-    }
-});
 
 Converter.addEventListener('click', (event) => {
     Converter_Display.style.display = 'block';
@@ -328,9 +328,14 @@ decrementBtn.addEventListener('click', () => {
     updateCounterDisplay();
 });
 
-ConvertBtn.addEventListener('click', () => {
+ConvertBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    console.log('Convert button clicked');
     Converter_Display.style.display = 'none';
     Mole = count;
-    
+});
 
-})
+Roll.addEventListener('click', () => {
+    GachaPull();
+    displayResult();
+});
