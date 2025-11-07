@@ -41,7 +41,7 @@ Atoms = 0;
 
 Mole = count;
 
-const pool = ['h2o', 'cold h2o', 'long alcohol', 'salt', 'ethanol', 'Blocker'];
+const pool = ['H2O', 'COLD H2O', 'LONG ALCOHOL', 'SALT', 'ETHANOL', 'BLOCKER'];
 let output = ""
 
 
