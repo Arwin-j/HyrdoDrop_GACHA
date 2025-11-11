@@ -1,0 +1,54 @@
+Story:
+
+A Water Cycle based gacha game
+-> Start a single drop and conquer other particles
+
+Game Loop:
+Fight Enemies -> Get Atoms -> Convert Atoms to Molecules -> Use Molecules to get Molecules of Substances -> Substances Increase/Decrease Atk/Health/Wet Chance/Wet Chance Evasion -> Reach Final Stage to Defeat Boss and Win
+
+Main Character:
+-> Drop
+
+Molecules:
+-> H2O - Increase Health By 1
+-> Cold Water - Decrease Health By 1
+-> Long Alcohol - Increases Wet Chance Evasion by 10%
+-> Salt - Increase Attack 1
+-> Ethanol - Increases Wet Chance by 15%
+-> Blocker - Increase Health By 2
+
+Enemy:
+-> Dust 1 Health 1 Attack - 1 Atom Drop
+
+Mini Boss
+-> Heat 2 Health 1 Attack - 2 Atom Drop
+-> Wind 2 Health 2 Attack 10% Wet Chance - 3 Atom Drop
+-> Germ 5 Health 1 Attack 30% Wet Chance Evasion - 5 Atom Drop
+-> Bubble 1 Health 2 Attack 60% Wet Chance Evasion - 9 Atom Drop
+
+Boss:
+-> Snow Man -> 50 Health 3 Attack 30% Wet Chance
+
+Stages:
+-> Cloud Stage
+-> Pour Stage
+-> Puddle Stage
+-> Evaporation Stage
+-> Final Boss Stage
+
+Cloud Stage:
+Starting: Moles - 0 Ending: Moles - 4
+
+Enemy: Dust - 10
+
+Mini Boss: Heat - 1
+
+12 Atoms - 4 Rolls.
+
+
+
+
+
+
+
+
